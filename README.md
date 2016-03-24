@@ -189,11 +189,13 @@ Issue a GET request to `/services/about`
 
 Shown below is a fully specified configuration section for Sitecore.Ship:
 
-    <packageInstallation enabled="true" allowRemote="true" allowPackageStreaming="true" recordInstallationHistory="true">
+    <packageInstallation enabled="true" allowRemote="true" allowPackageStreaming="true" recordInstallationHistory="true" authHeader="X-Ship-Auth" authToken="AC074C6EDBA518F807E0E3F2F36A8B512D9C5637744BE67CD60D271244AC523AAB9CF8DB7F7D3934205E5BD850B2768C7171C3C594D6C6BFCA3992CCCCA67148">
       <Whitelist>
         <add name="local loopback" IP="127.0.01" />
         <add name="Allowed machine 1" IP="10.20.3.4" />
         <add name="Allowed machine 2" IP="10.40.4.5" />
+        <add name="Allowed IP Range 1" IP="23.96.0.0-23.96.255.255" />
+        <add name="Allowed IP Range 2" IP="65.52.0.0-65.52.255.255" />
       </Whitelist>
     </packageInstallation>
 
@@ -204,6 +206,8 @@ Default configuration:
 * allowRemote = false
 * allowPackageStreaming = false
 * recordInstallationHistory = false
+* authHeader = "X-Ship-Auth"
+* authToken = ""
 * IP address whitelisting is disabled if no elements are specified below the `<Whitelist>` element or if the element is omited.
 
 When `recordInstallationHistory` has been set to true packages should follow the naming conventions set out below:
@@ -221,7 +225,19 @@ For example:
 
     01-AboutPage.update
 
+
     02-HomePage.zip
+
+
+####Authentication Token
+When an authentication header and token value has been set, you can pass this token in the header of the request and it will be validated against what has been set in the configuration.
+
+For example:
+
+    authHeader="X-Ship-Auth"
+
+    authToken="AC074C6EDBA518F807E0E3F2F36A8B512D9C5637744BE67CD60D271244AC523AAB9CF8DB7F7D3934205E5BD850B2768C7171C3C594D6C6BFCA3992CCCCA67148"
+
 
 ### Tools
 

@@ -5,5 +5,7 @@
         bool IsLocal { get; }
 
         string UserHostAddress { get; }
+
+        string AuthToken(string configAuthHeader);
     }
 }

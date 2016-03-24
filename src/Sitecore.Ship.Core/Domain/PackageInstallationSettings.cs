@@ -12,6 +12,8 @@ namespace Sitecore.Ship.Core.Domain
             RecordInstallationHistory = false;
             AddressWhitelist = new List<string>();
             MuteAuthorisationFailureLogging = false;
+            AuthToken = string.Empty;
+            AuthHeader = string.Empty;
         }
 
         public bool IsEnabled { get; set; }
@@ -20,6 +22,8 @@ namespace Sitecore.Ship.Core.Domain
         public bool RecordInstallationHistory { get; set; }
         public List<string> AddressWhitelist { get; set; }
         public bool MuteAuthorisationFailureLogging { get; set; }
+        public string AuthHeader { get; set; }
+        public string AuthToken { get; set; }
 
         public bool HasAddressWhitelist { get { return AddressWhitelist.Count > 0; } }
     }

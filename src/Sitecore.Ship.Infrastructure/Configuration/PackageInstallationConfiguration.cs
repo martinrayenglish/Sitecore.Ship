@@ -11,6 +11,8 @@ namespace Sitecore.Ship.Infrastructure.Configuration
         const string RecordInstallationHistoryKey = "recordInstallationHistory";
         const string WhitelistElementName = "Whitelist";
         const string MuteAuthorisationFailureLoggingKey = "muteAuthorisationFailureLogging";
+        const string AuthHeaderKey = "authHeader";
+        const string AuthTokenKey = "authToken";
 
         public static PackageInstallationConfiguration GetConfiguration()
         {
@@ -26,6 +28,12 @@ namespace Sitecore.Ship.Infrastructure.Configuration
 
         [ConfigurationProperty(AllowPackageStreamingKey, IsRequired = false, DefaultValue = false)]
         public bool AllowPackageStreaming { get { return (bool)this[AllowPackageStreamingKey]; } }
+
+        [ConfigurationProperty(AuthHeaderKey, IsRequired = false, DefaultValue = "")]
+        public string AuthHeader { get { return (string)this[AuthHeaderKey]; } }
+
+        [ConfigurationProperty(AuthTokenKey, IsRequired = false, DefaultValue = "")]
+        public string AuthToken { get { return (string)this[AuthTokenKey]; } }
 
         [ConfigurationProperty(RecordInstallationHistoryKey, IsRequired = false, DefaultValue = false)]
         public bool RecordInstallationHistory { get { return (bool)this[RecordInstallationHistoryKey]; } }
