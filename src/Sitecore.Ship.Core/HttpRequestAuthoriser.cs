@@ -34,9 +34,8 @@ namespace Sitecore.Ship.Core
                 return false;
             }
 
-            if (!_checkRequests.AuthToken(_packageInstallationSettings.AuthHeader).Equals(_packageInstallationSettings.AuthToken))
+            if (!ValidAuthToken())
             {
-                LogAccessDenial("packageInstallation 'authtoken' doesn't match configuration");
                 return false;
             }
 
@@ -82,6 +81,19 @@ namespace Sitecore.Ship.Core
                 _logger.Write(string.Format("Sitecore.Ship access denied: {0}", diagnostic));
             }
         }
+
+        private bool ValidAuthToken()
+        {
+            if (!_checkRequests.AuthToken(_packageInstallationSettings.AuthHeader).Equals(_packageInstallationSettings.AuthToken))
+            {
+                LogAccessDenial("packageInstallation 'authtoken' doesn't match configuration");
+                return false;
+            }
+
+            _logger.Write(string.Format("packageInstallation 'authtoken' match found for '{0}'", _packageInstallationSettings.AuthHeader));
+            return true;
+        }
+
         public static bool IsInRange(IPAddress source, IPAddress start, IPAddress end)
         {
             if (IPAddress.IsLoopback(source) == false)
