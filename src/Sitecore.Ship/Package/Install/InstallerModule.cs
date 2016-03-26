@@ -18,7 +18,7 @@ namespace Sitecore.Ship.Package.Install
         private readonly IInstallationRecorder _installationRecorder;
 
         public InstallerModule(IPackageRepository repository, IAuthoriser authoriser, ITempPackager tempPackager, IInstallationRecorder installationRecorder)
-            : base(authoriser, "/services")
+            : base(authoriser, "/sitecoreship")
         {
             _repository = repository;
             _tempPackager = tempPackager;

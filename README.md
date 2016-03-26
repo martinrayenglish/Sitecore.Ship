@@ -56,11 +56,11 @@ Run the following commands:
 
 #### Install Package - Specify Server File Path
 
-Issue a POST request to `/services/package/install` and pass it a path parameter in the x-www-form-urlencoded form-data specifying the location of the update package.
+Issue a POST request to `/sitecoreship/package/install` and pass it a path parameter in the x-www-form-urlencoded form-data specifying the location of the update package.
 
 Example:
 
-    POST /services/package/install HTTP/1.1
+    POST /sitecoreship/package/install HTTP/1.1
     Host: shiptester
     Cache-Control: no-cache
     
@@ -76,7 +76,7 @@ When the package is installed correctly a 201 Created HTTP Status code will be r
     Content-Length 108
     Content-Type application/json
     Date Sun, 14 Jul 2013 07:44:50 GMT
-    Location: http://shiptest/services/package/latestversion
+    Location: http://shiptest/sitecoreship/package/latestversion
 
 The body of a successfull request will contain details of the package contents in JSON format. For example:
 
@@ -89,11 +89,11 @@ The request also takes an optional `DisableIndexing` parameter in the x-www-form
 
 #### Install Package - File Upload
 
-Issue a POST request to `/services/package/install/fileupload` and pass it the location of an update package file to upload to the server.
+Issue a POST request to `/sitecoreship/package/install/fileupload` and pass it the location of an update package file to upload to the server.
 
 Example:
 
-    POST /services/package/install/fileupload HTTP/1.1
+    POST /sitecoreship/package/install/fileupload HTTP/1.1
     Host: shiptester
     Accept: application/json, text/javascript, */*
     Cache-Control: no-cache
@@ -113,7 +113,7 @@ The request also accepts an optional `DisableIndexing` parameter. For details of
 
 #### Package - Latest Version
 
-Issue a GET request to `/services/package/latestversion` to get details of the last package to have been installed by the Ship services.
+Issue a GET request to `/sitecoreship/package/latestversion` to get details of the last package to have been installed by the Ship services.
 
 Note that latest version reporting is disabled by default. Refer to the `recordInstallationHistory` setting in the Configuration Options section.
 
@@ -121,7 +121,7 @@ Note that latest version reporting is disabled by default. Refer to the `recordI
 
 #### Publishing
 
-Issue a POST request to `/services/publish/{mode}` where {mode} is 
+Issue a POST request to `/sitecoreship/publish/{mode}` where {mode} is 
 
 * full
 * smart
@@ -131,7 +131,7 @@ The publishing source, targets and languages can be specified as form parameters
 
 Example:
 
-    POST /services/publish/full HTTP/1.1
+    POST /sitecoreship/publish/full HTTP/1.1
     Host: shiptester
     Cache-Control: no-cache
     
@@ -150,11 +150,11 @@ Example:
     ----WebKitFormBoundaryE19zNvXGzXaLvS5C
 
 
-Issue a GET request to `/services/publish/lastcompleted/{source}/{target}/{language}` to review the timestamp of the last publish operation. The `{source}`, `{target}` and `{language}` parameters are optional and will default to `master`, `web` and `en` respectively if not specified in the request.
+Issue a GET request to `/sitecoreship/publish/lastcompleted/{source}/{target}/{language}` to review the timestamp of the last publish operation. The `{source}`, `{target}` and `{language}` parameters are optional and will default to `master`, `web` and `en` respectively if not specified in the request.
 
 To publish a list of items
 
-Issue a Post to '/services/publish/listofitems' with JSON  like the following:
+Issue a Post to '/sitecoreship/publish/listofitems' with JSON  like the following:
 	
 	{
     
@@ -182,7 +182,7 @@ Issue a Post to '/services/publish/listofitems' with JSON  like the following:
 
 #### About
 
-Issue a GET request to `/services/about`
+Issue a GET request to `/sitecoreship/about`
 
 
 ### Configuration Options

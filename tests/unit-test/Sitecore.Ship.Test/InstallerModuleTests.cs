@@ -47,7 +47,7 @@ namespace Sitecore.Ship.Test
             // Arrange
 
             // Act
-            var response = _browser.Post("/services/package/install", with =>
+            var response = _browser.Post("/sitecoreship/package/install", with =>
                                                                {
                                                                    with.HttpRequest();
                                                                    with.FormValue("path", @"d:\package.update");
@@ -57,7 +57,7 @@ namespace Sitecore.Ship.Test
             // Assert
             Assert.Equal(HttpStatusCode.Created, response.StatusCode);
             Assert.Equal("application/x-www-form-urlencoded", response.Context.Request.Headers.ContentType);
-            Assert.Equal("/services/package/latestversion", response.Headers["Location"]);
+            Assert.Equal("/sitecoreship/package/latestversion", response.Headers["Location"]);
         }
 
         [Fact]
@@ -66,7 +66,7 @@ namespace Sitecore.Ship.Test
             // Arrange
 
             // Act
-            var response = _browser.Post("/services/package/install", with => with.HttpRequest());
+            var response = _browser.Post("/sitecoreship/package/install", with => with.HttpRequest());
 
             // Assert
             Assert.NotNull(response.Headers["x-processing-time"]);
@@ -79,7 +79,7 @@ namespace Sitecore.Ship.Test
             _mockPackageRepos.Setup(x => x.AddPackage(It.IsAny<InstallPackage>())).Throws(new NotFoundException());
 
             // Act
-            var response = _browser.Post("/services/package/install", with =>
+            var response = _browser.Post("/sitecoreship/package/install", with =>
             {
                 with.HttpRequest();
                 with.FormValue("path", @"y:\foo.update");
@@ -99,7 +99,7 @@ namespace Sitecore.Ship.Test
             _mockAuthoriser.Setup(x => x.IsAllowed()).Returns(false);
 
             // Act
-            var response = _browser.Post("/services/package/install", with =>
+            var response = _browser.Post("/sitecoreship/package/install", with =>
             {
                 with.HttpRequest();
                 with.FormValue("path", @"y:\foo.update");
@@ -122,7 +122,7 @@ namespace Sitecore.Ship.Test
             _mockPackageRepos.Setup(x => x.AddPackage(It.IsAny<InstallPackage>())).Returns(new PackageManifest());
 
             // Act
-            var response = _browser.Post("/services/package/install/fileupload", with =>
+            var response = _browser.Post("/sitecoreship/package/install/fileupload", with =>
             {
                 with.HttpRequest();
                 with.MultiPartFormData(multipart);
@@ -130,7 +130,7 @@ namespace Sitecore.Ship.Test
 
             // Assert
             Assert.Equal(HttpStatusCode.Created, response.StatusCode);
-            Assert.Equal("/services/package/latestversion", response.Headers["Location"]);
+            Assert.Equal("/sitecoreship/package/latestversion", response.Headers["Location"]);
         }
 
         private static Stream CreateFakeFileStream(string thisIsTheContentsOfAFile)
@@ -149,7 +149,7 @@ namespace Sitecore.Ship.Test
             _mockInstallationRecorder.Setup(x => x.GetLatestPackage()).Returns(new InstalledPackageNotFound());
 
             // Act
-            var response = _browser.Get("/services/package/latestversion", with => with.HttpRequest());
+            var response = _browser.Get("/sitecoreship/package/latestversion", with => with.HttpRequest());
 
             // Assert
             Assert.Equal(HttpStatusCode.NoContent, response.StatusCode);
@@ -161,7 +161,7 @@ namespace Sitecore.Ship.Test
             _mockInstallationRecorder.Setup(x => x.GetLatestPackage()).Returns(new InstalledPackage());
 
             // Act
-            var response = _browser.Get("/services/package/latestversion", with => with.HttpRequest());
+            var response = _browser.Get("/sitecoreship/package/latestversion", with => with.HttpRequest());
 
             // Assert
             var installedPackage = Newtonsoft.Json.JsonConvert.DeserializeObject<InstalledPackage>(response.Body.AsString());
@@ -182,7 +182,7 @@ namespace Sitecore.Ship.Test
             _mockPackageRepos.Setup(x => x.AddPackage(It.IsAny<InstallPackage>())).Returns(new PackageManifest());
 
             // Act
-            var response = _browser.Post("/services/package/install/fileupload", with =>
+            var response = _browser.Post("/sitecoreship/package/install/fileupload", with =>
             {
                 with.HttpRequest();
                 with.MultiPartFormData(multipart);

@@ -6,7 +6,7 @@ namespace Sitecore.Ship.Infrastructure.Web
     {
         public static string PackageLatestVersion
         {
-            get { return "/services/package/latestversion"; }
+            get { return "/sitecoreship/package/latestversion"; }
         }
     }
 }

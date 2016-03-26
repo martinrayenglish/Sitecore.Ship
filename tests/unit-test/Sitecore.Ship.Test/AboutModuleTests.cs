@@ -37,7 +37,7 @@ namespace Sitecore.Ship.Test
         [Fact]
         public void Should_return_about_page_as_view()
         {
-            var response = _browser.Get("/services/about");
+            var response = _browser.Get("/sitecoreship/about");
 
             response.Body["h1"].AllShouldContain("Sitecore.Ship", StringComparison.InvariantCultureIgnoreCase);
         }

@@ -62,7 +62,7 @@ namespace Sitecore.Ship.AspNet.Package
         private static bool CanHandle(HttpContextBase context)
         {
             return context.Request.Url != null && 
-                   context.Request.Url.PathAndQuery.EndsWith("/services/package/install", StringComparison.InvariantCultureIgnoreCase) && 
+                   context.Request.Url.PathAndQuery.EndsWith("/sitecoreship/package/install", StringComparison.InvariantCultureIgnoreCase) && 
                    context.Request.HttpMethod == "POST";
         }
 

@@ -13,7 +13,7 @@
     <validation validateIntegratedModeConfiguration="false"/>
     <handlers>
       <remove name="Nancy" />
-      <add name="Nancy" verb="*" type="Nancy.Hosting.Aspnet.NancyHttpRequestHandler" path="/services/*"  />
+      <add name="Nancy" verb="*" type="Nancy.Hosting.Aspnet.NancyHttpRequestHandler" path="/sitecoreship/*"  />
     </handlers>
   </system.webServer>
 </configuration>

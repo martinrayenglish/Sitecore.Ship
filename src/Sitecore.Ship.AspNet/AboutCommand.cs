@@ -25,7 +25,7 @@ namespace Sitecore.Ship.AspNet
 
         private static bool CanHandle(HttpContextBase context)
         {
-            return context.Request.Url != null &&  context.Request.Url.PathAndQuery.EndsWith("/services/about", StringComparison.InvariantCultureIgnoreCase);
+            return context.Request.Url != null &&  context.Request.Url.PathAndQuery.EndsWith("/sitecoreship/about", StringComparison.InvariantCultureIgnoreCase);
         }
     }
 }

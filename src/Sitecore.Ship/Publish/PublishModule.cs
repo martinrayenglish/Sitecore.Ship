@@ -14,7 +14,7 @@ namespace Sitecore.Ship.Publish
         private readonly IPublishService _publishService;
 
         public PublishModule(IPublishService publishService, IAuthoriser authoriser)
-            : base(authoriser, "/services/publish")
+            : base(authoriser, "/sitecoreship/publish")
         {
             _publishService = publishService;
 

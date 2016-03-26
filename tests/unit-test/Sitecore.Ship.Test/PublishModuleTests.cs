@@ -49,7 +49,7 @@ namespace Sitecore.Ship.Test
         [Fact]
         public void Should_return_status_bad_request_if_publish_mode_is_unrecognised()
         {
-            var response = _browser.Post("/services/publish/short");
+            var response = _browser.Post("/sitecoreship/publish/short");
 
             response.StatusCode.ShouldEqual(HttpStatusCode.BadRequest);
         }
@@ -57,7 +57,7 @@ namespace Sitecore.Ship.Test
         [Fact]
         public void Should_return_status_accepted_when_initiating_a_publish()
         {
-            var response = _browser.Post("/services/publish/full");
+            var response = _browser.Post("/sitecoreship/publish/full");
 
             response.StatusCode.ShouldEqual(HttpStatusCode.Accepted);
         }
@@ -65,7 +65,7 @@ namespace Sitecore.Ship.Test
         [Fact]
         public void Should_pass_publish_targets_to_service_if_specified()
         {
-            var response = _browser.Post("/services/publish/full", with =>
+            var response = _browser.Post("/sitecoreship/publish/full", with =>
             {
                 with.HttpRequest();
                 with.FormValue("source", "master");
@@ -91,7 +91,7 @@ namespace Sitecore.Ship.Test
         [Fact]
         public void Should_default_publish_source_to_master_if_not_specified()
         {
-            var response = _browser.Post("/services/publish/full", with =>
+            var response = _browser.Post("/sitecoreship/publish/full", with =>
             {
                 with.HttpRequest();
                 with.FormValue("targets", "target1,target2");
@@ -106,7 +106,7 @@ namespace Sitecore.Ship.Test
         [Fact]
         public void Should_default_publish_targets_to_web_if_not_specified()
         {
-            var response = _browser.Post("/services/publish/full", with =>
+            var response = _browser.Post("/sitecoreship/publish/full", with =>
             {
                 with.HttpRequest();
                 with.FormValue("languages", "lang1,lang2");
@@ -121,7 +121,7 @@ namespace Sitecore.Ship.Test
         [Fact]
         public void Should_default_publish_languages_to_en_if_not_specified()
         {
-            var response = _browser.Post("/services/publish/full", with =>
+            var response = _browser.Post("/sitecoreship/publish/full", with =>
             {
                 with.HttpRequest();
                 with.Header("Content-Type", "application/x-www-form-urlencoded");
@@ -137,7 +137,7 @@ namespace Sitecore.Ship.Test
         {
             _mockAuthoriser.Setup(x => x.IsAllowed()).Returns(false);
 
-            var response = _browser.Post("/services/publish/full");
+            var response = _browser.Post("/sitecoreship/publish/full");
 
             response.StatusCode.ShouldEqual(HttpStatusCode.Unauthorized);
         }
@@ -147,7 +147,7 @@ namespace Sitecore.Ship.Test
         {
             _mockAuthoriser.Setup(x => x.IsAllowed()).Returns(false);
 
-            var response = _browser.Get("/services/publish/lastcompleted");
+            var response = _browser.Get("/sitecoreship/publish/lastcompleted");
 
             response.StatusCode.ShouldEqual(HttpStatusCode.Unauthorized);
         }
@@ -164,7 +164,7 @@ namespace Sitecore.Ship.Test
                 .Callback<PublishLastCompleted>(x => parameters = x)
                 .Returns(expected);
 
-            _browser.Get("/services/publish/lastcompleted");
+            _browser.Get("/sitecoreship/publish/lastcompleted");
 
             parameters.Source.ShouldEqual("master");
             parameters.Target.ShouldEqual("web");
@@ -187,7 +187,7 @@ namespace Sitecore.Ship.Test
                 .Callback<PublishLastCompleted>(x => parameters = x)
                 .Returns(expected);
 
-            _browser.Get("/services/publish/lastcompleted/{0}/{1}/{2}".Formatted(sourceDb, targetDb,language));
+            _browser.Get("/sitecoreship/publish/lastcompleted/{0}/{1}/{2}".Formatted(sourceDb, targetDb,language));
 
             parameters.Source.ShouldEqual(sourceDb);
             parameters.Target.ShouldEqual(targetDb);
@@ -203,7 +203,7 @@ namespace Sitecore.Ship.Test
                 .Setup(x => x.GetLastCompletedRun(It.IsAny<PublishLastCompleted>()))
                 .Returns(expected);
 
-            var response = _browser.Get("/services/publish/lastcompleted");
+            var response = _browser.Get("/sitecoreship/publish/lastcompleted");
 
             var date = Newtonsoft.Json.JsonConvert.DeserializeObject<DateTime>(response.Body.AsString());
 
@@ -216,7 +216,7 @@ namespace Sitecore.Ship.Test
         {
             _mockPublishService.Setup(x => x.Run(It.IsAny<ItemsToPublish>()));
 
-            var response = _browser.Post("/services/publish/listofitems");
+            var response = _browser.Post("/sitecoreship/publish/listofitems");
 
             response.StatusCode.ShouldEqual(HttpStatusCode.Accepted);
         }
